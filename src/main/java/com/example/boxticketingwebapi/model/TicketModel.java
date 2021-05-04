@@ -1,10 +1,8 @@
 package com.example.boxticketingwebapi.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
 public class TicketModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
