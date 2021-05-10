@@ -11,7 +11,7 @@ public class TicketModel {
     @ManyToOne
     private EventModel event;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private TicketTypeModel ticketType;
 
     public TicketModel(int ticketId, EventModel event, TicketTypeModel ticketType) {
