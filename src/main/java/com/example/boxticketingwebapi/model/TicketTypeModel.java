@@ -9,9 +9,6 @@ public class TicketTypeModel {
     private Integer ticketTypeId;
     private String typeName;
 
-    @ManyToOne
-    private EventModel event;
-
     private double price;
 
     public TicketTypeModel() {
@@ -45,18 +42,9 @@ public class TicketTypeModel {
         this.ticketTypeId = ticketTypeId;
     }
 
-    public EventModel getEvent() {
-        return event;
-    }
-
-    public void setEvent(EventModel event) {
-        this.event = event;
-    }
-
     public TicketTypeModel(int ticketTypeId, String typeName, EventModel event, double price) {
         this.ticketTypeId = ticketTypeId;
         this.typeName = typeName;
         this.price = price;
     }
-
 }
