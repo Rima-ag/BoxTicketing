@@ -1,16 +1,18 @@
 package com.example.boxticketingwebapi.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+//@Table(name = "eventtable")
 public class EventModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer eventId;
+    private Integer eventid;
 
     private String date;
 
@@ -20,12 +22,12 @@ public class EventModel {
 
     private String description;
 
-    public Integer getEventId() {
-        return eventId;
+    public int getEventId() {
+        return eventid;
     }
 
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
+    public void setEventId(int eventid) {
+        this.eventid = eventid;
     }
 
     public String getDate() {
@@ -61,12 +63,12 @@ public class EventModel {
     }
 
     public EventModel(){
-
     }
 
-    public EventModel(int eventId, String date, String name) {
-        this.eventId = eventId;
+    public EventModel(String date, String name,String venue,String description) {
         this.date = date;
         this.name = name;
+        this.venue = venue;
+        this.description = description;
     }
 }

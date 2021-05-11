@@ -3,6 +3,7 @@ import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
+//@Table(name = "account")
 public class AccountModel {
 
     @Id
@@ -11,7 +12,7 @@ public class AccountModel {
     private String password;
     private String username;
     private String amountInWallet;
-    private Collection<TicketModel> tickets;
+    //private Collection<TicketModel> tickets;
 
     public Integer getAccountId() {
         return accountId;
@@ -44,13 +45,12 @@ public class AccountModel {
     public void setAmountInWallet(String amountInWallet) {
         this.amountInWallet = amountInWallet;
     }
+//    @OneToMany(fetch = FetchType.EAGER)
+//    public Collection<TicketModel> getTickets() {
+//        return tickets;
+//    }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    public Collection<TicketModel> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Collection<TicketModel> tickets) {
-        this.tickets = tickets;
-    }
+//    public void setTickets(Collection<TicketModel> tickets) {
+//        this.tickets = tickets;
+//    }
 }

@@ -22,4 +22,19 @@ public class EventController {
         return this.eventService.getAllEvents();
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody /*Inserts returned value in reponse body*/ EventModel getEvent(@PathVariable(value = "id") Integer eventId) {
+        return this.eventService.getEventDetails(eventId);
+    }
+    @PostMapping(value = "/addEvent")
+    public EventModel addEvent(@RequestBody EventModel event) {
+        return this.eventService.saveEvent(event);
+    }
+
+    @DeleteMapping(value = "/deleteEvent/{id}")
+    public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
+        return this.eventService.deleteEvent(eventId);
+    }
+
 }
