@@ -16,14 +16,19 @@ public class EventService {
     @Autowired
     private IEventRepo eventRepo;
 
-    public List<EventModel> getAllEvents(){
-        ArrayList<EventModel> events = new ArrayList<EventModel>();
-        this.eventRepo.findAll().forEach(events::add);
+    public List<EventModel> getAllEvents() throws Exception {
+        //ArrayList<EventModel> events = new ArrayList<EventModel>();
+        List<EventModel> events = (List<EventModel>) this.eventRepo.findAll();
+        if(events.size()>0){
+            throw new Exception("List is Empty");
+        }
         return events;
     }
 
-    public EventModel getEventDetails(Integer id){
-        return this.eventRepo.findById(id).orElse(null);
+    public EventModel getEventDetails(Integer id) {
+        EventModel event = this.eventRepo.findById(id).get();
+        return event;
+
     }
 
     public EventModel saveEvent(EventModel event){
