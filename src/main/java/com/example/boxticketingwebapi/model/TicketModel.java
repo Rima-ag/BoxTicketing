@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class TicketModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketId;
+    private Long ticketId;
 
     @ManyToOne
     private EventModel event;
@@ -14,7 +14,7 @@ public class TicketModel {
     @ManyToOne(fetch = FetchType.EAGER)
     private TicketTypeModel ticketType;
 
-    public TicketModel(Integer ticketId, EventModel event, TicketTypeModel ticketType) {
+    public TicketModel(Long ticketId, EventModel event, TicketTypeModel ticketType) {
         this.ticketId = ticketId;
         this.event = event;
         this.ticketType = ticketType;
@@ -23,11 +23,11 @@ public class TicketModel {
     public TicketModel() {
     }
 
-    public Integer getTicketId() {
+    public Long getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(Integer ticketId) {
+    public void setTicketId(Long ticketId) {
         this.ticketId = ticketId;
     }
 

@@ -2,24 +2,24 @@ package com.example.boxticketingwebapi.service;
 
 
 import com.example.boxticketingwebapi.DataNotFoundException;
-import com.example.boxticketingwebapi.model.AccountModel;
-import com.example.boxticketingwebapi.repo.IAccountRepo;
+import com.example.boxticketingwebapi.model.UserModel;
+import com.example.boxticketingwebapi.repo.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class AccountService {
+public class UserService {
 
     @Autowired
-    private IAccountRepo accountRepo;
+    private IUserRepo accountRepo;
 
-    public AccountModel saveAccount(AccountModel account){
+    public UserModel saveAccount(UserModel account){
         return accountRepo.save(account);
     }
 
     public String deleteAccount(Integer id){
-        AccountModel account = this.accountRepo.findById(id).orElse(null);
+        UserModel account = this.accountRepo.findById(id).orElse(null);
         if(account == null) {
             throw new DataNotFoundException("Account with id:" + id + " doesn't exists!");
         }

@@ -1,27 +1,54 @@
 package com.example.boxticketingwebapi.model;
 import java.util.Collection;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity(name = "ACCOUNT")
-public class AccountModel {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity(name = "USER")
+@Table(uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username")
+        })
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer accountId;
+    private Long userId;
+
+    @NotBlank
+    @Size(max = 120)
     private String password;
+
+    @NotBlank
+    @Size(max = 20)
     private String username;
+
     private String amountInWallet;
     @OneToMany(fetch = FetchType.LAZY)
     private Collection<TicketModel> tickets;
 
-    public AccountModel() {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleModel> roles = new HashSet<>();
+
+    public UserModel() {
     }
 
-    public AccountModel(Integer accountId, String password, String username, String amountInWallet) {
-        this.accountId = accountId;
+    public UserModel(String username, String password) {
         this.password = password;
         this.username = username;
-        this.amountInWallet = amountInWallet;
+    }
+
+    public Set<RoleModel> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleModel> roles) {
+        this.roles = roles;
     }
 
     public void addTicket(TicketModel ticket){
@@ -32,12 +59,12 @@ public class AccountModel {
         tickets.remove(ticket);
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Long getId() {
+        return userId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {

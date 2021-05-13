@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/v1/events")
+@RequestMapping("/ticket-api/v1/events")
 public class EventController {
 
 
@@ -20,7 +22,7 @@ public class EventController {
 
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody /*Inserts returned value in reponse body*/ List<EventModel> getEvents() throws Exception {
+    public @ResponseBody /*Inserts returned value in response body*/ List<EventModel> getEvents() throws Exception {
         return this.eventService.getAllEvents();
     }
 
@@ -35,12 +37,14 @@ public class EventController {
 
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public EventModel addEvent(@RequestBody EventModel event) {
         return this.eventService.saveEvent(event);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
         return this.eventService.deleteEvent(eventId);
     }

@@ -15,7 +15,7 @@ public class EventModel extends RepresentationModel<EventModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer eventId;
+    private Long eventId;
 
     private String date;
 
@@ -25,11 +25,11 @@ public class EventModel extends RepresentationModel<EventModel> {
 
     private String description;
 
-    public Integer getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
@@ -69,7 +69,7 @@ public class EventModel extends RepresentationModel<EventModel> {
     }
 
     @JsonCreator
-    public EventModel(Integer eventId, String date, String name,
+    public EventModel(Long eventId, String date, String name,
                       String venue,String description) {
         this.eventId = eventId;
         this.date = date;

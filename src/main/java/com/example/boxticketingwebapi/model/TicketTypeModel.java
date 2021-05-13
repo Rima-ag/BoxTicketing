@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class TicketTypeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketTypeId;
+    private Long ticketTypeId;
     private String typeName;
 
     private double price;
@@ -14,11 +14,11 @@ public class TicketTypeModel {
     public TicketTypeModel() {
     }
 
-    public Integer getTicketTypeId() {
+    public Long getTicketTypeId() {
         return ticketTypeId;
     }
 
-    public void setTicketTypeId(Integer ticketTypeId) {
+    public void setTicketTypeId(Long ticketTypeId) {
         this.ticketTypeId = ticketTypeId;
     }
 
@@ -38,7 +38,7 @@ public class TicketTypeModel {
         this.price = price;
     }
 
-    public TicketTypeModel(Integer ticketTypeId, String typeName, EventModel event, double price) {
+    public TicketTypeModel(Long ticketTypeId, String typeName, EventModel event, double price) {
         this.ticketTypeId = ticketTypeId;
         this.typeName = typeName;
         this.price = price;
