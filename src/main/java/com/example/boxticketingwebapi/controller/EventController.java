@@ -18,7 +18,6 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody /*Inserts returned value in reponse body*/ List<EventModel> getEvents() throws Exception {
@@ -33,14 +32,15 @@ public class EventController {
         event.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getEvents()).withRel("getEvents"));
         return event;
     }
-    @PostMapping(value = "/addEvent")
+
+    @PostMapping(value = "/addEvent" , consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public EventModel addEvent(@RequestBody EventModel event) {
         return this.eventService.saveEvent(event);
     }
 
     @DeleteMapping(value = "/deleteEvent/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
         return this.eventService.deleteEvent(eventId);
     }
