@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity(name = "TICKET")
 public class TicketModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketId;
 
     @ManyToOne

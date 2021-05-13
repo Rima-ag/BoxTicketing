@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class EventModel extends RepresentationModel<EventModel> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer eventid;
 
     private String date;
