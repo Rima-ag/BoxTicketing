@@ -1,17 +1,20 @@
 package com.example.boxticketingwebapi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-//@Table(name = "eventtable")
-public class EventModel {
+@Entity(name = "EVENT")
+public class EventModel extends RepresentationModel<EventModel> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer eventid;
 
     private String date;
@@ -65,7 +68,9 @@ public class EventModel {
     public EventModel(){
     }
 
-    public EventModel(String date, String name,String venue,String description) {
+    @JsonCreator
+    public EventModel(String date, String name,
+                      String venue,String description) {
         this.date = date;
         this.name = name;
         this.venue = venue;

@@ -2,17 +2,35 @@ package com.example.boxticketingwebapi.model;
 import java.util.Collection;
 import javax.persistence.*;
 
-@Entity
-//@Table(name = "account")
+@Entity(name = "ACCOUNT")
 public class AccountModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
     private String password;
     private String username;
     private String amountInWallet;
-    //private Collection<TicketModel> tickets;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Collection<TicketModel> tickets;
+
+    public AccountModel() {
+    }
+
+    public AccountModel(Integer accountId, String password, String username, String amountInWallet) {
+        this.accountId = accountId;
+        this.password = password;
+        this.username = username;
+        this.amountInWallet = amountInWallet;
+    }
+
+    public void addTicket(TicketModel ticket){
+        tickets.add(ticket);
+    }
+
+    public void removeTicket(TicketModel ticket){
+        tickets.remove(ticket);
+    }
 
     public Integer getAccountId() {
         return accountId;
@@ -45,12 +63,12 @@ public class AccountModel {
     public void setAmountInWallet(String amountInWallet) {
         this.amountInWallet = amountInWallet;
     }
-//    @OneToMany(fetch = FetchType.EAGER)
-//    public Collection<TicketModel> getTickets() {
-//        return tickets;
-//    }
 
-//    public void setTickets(Collection<TicketModel> tickets) {
-//        this.tickets = tickets;
-//    }
+    public Collection<TicketModel> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Collection<TicketModel> tickets) {
+        this.tickets = tickets;
+    }
 }

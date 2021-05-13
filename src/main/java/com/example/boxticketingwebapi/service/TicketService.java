@@ -1,6 +1,7 @@
 package com.example.boxticketingwebapi.service;
 
 
+import com.example.boxticketingwebapi.DataNotFoundException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.model.TicketModel;
 import com.example.boxticketingwebapi.repo.IEventRepo;
@@ -21,10 +22,17 @@ public class TicketService {
     public List<TicketModel> getAllTickets() {
         ArrayList<TicketModel> tickets = new ArrayList<TicketModel>();
         this.ticketRepo.findAll().forEach(e -> tickets.add(e));
+        if(tickets.size()==0){
+            throw new DataNotFoundException("Tickets List is Empty");
+        }
         return tickets;
     }
 
     public TicketModel getTicketDetails(Integer id){
-        return this.ticketRepo.findById(id).orElse(null);
+        TicketModel ticket = this.ticketRepo.findById(id).orElse(null);
+        if(ticket == null){
+            throw new DataNotFoundException("Ticket Not Found");
+        }
+        return ticket;
     }
 }

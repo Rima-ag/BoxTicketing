@@ -1,0 +1,281 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BoxTicketing API",
+    "description": "API to interact with BoxTicketing",
+    "contact": {
+      "email": "paola.sharabaty@net.usj.edu.lb"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0-oas3"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:8080/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "events",
+      "description": "API calls exclusively related to event operations"
+    }
+  ],
+  "paths": {
+    "/events/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Fetches all events",
+        "description": "Fetches all the existing events\n",
+        "operationId": "getAllEvents",
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{eventId}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get an event by id",
+        "description": "Fetches event that has an id {eventId}",
+        "operationId": "getEventById",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Numeric ID of the event to get",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search result matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "search result not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/addEvent": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Add an event",
+        "description": "Adds an event",
+        "operationId": "addEvent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/deleteEvent/{eventId}": {
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Deletes an event",
+        "description": "Deletes an event",
+        "operationId": "deleteEventById",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Numeric ID of the event to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Event": {
+        "required": [
+          "date",
+          "eventId",
+          "name",
+          "venue"
+        ],
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "example": 15
+          },
+          "name": {
+            "type": "string",
+            "example": "El Classico"
+          },
+          "venue": {
+            "type": "string",
+            "example": "Santiago Bernabéu Stadium"
+          },
+          "date": {
+            "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+            "type": "string",
+            "format": "string",
+            "example": "2016-08-29"
+          }
+        }
+      },
+      "TicketType": {
+        "required": [
+          "price",
+          "ticketTypeId",
+          "typeName"
+        ],
+        "properties": {
+          "ticketTypeId": {
+            "type": "integer",
+            "example": 1
+          },
+          "typeName": {
+            "type": "string",
+            "example": "Class A"
+          },
+          "price": {
+            "type": "integer",
+            "example": 60
+          }
+        }
+      },
+      "Ticket": {
+        "required": [
+          "event",
+          "ticketId",
+          "type"
+        ],
+        "properties": {
+          "ticketId": {
+            "type": "integer",
+            "example": 1
+          },
+          "type": {
+            "$ref": "#/components/schemas/TicketType"
+          },
+          "event": {
+            "$ref": "#/components/schemas/Event"
+          }
+        }
+      },
+      "Account": {
+        "required": [
+          "accountId",
+          "amountInWallet",
+          "password",
+          "username"
+        ],
+        "properties": {
+          "accountId": {
+            "type": "integer",
+            "example": 6
+          },
+          "username": {
+            "type": "string",
+            "example": "Paola"
+          },
+          "password": {
+            "type": "string",
+            "example": "ILoveBono"
+          },
+          "amountInWallet": {
+            "type": "integer",
+            "example": 600
+          }
+        }
+      },
+      "body": {
+        "required": [
+          "date",
+          "name",
+          "venue"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "El Classico"
+          },
+          "venue": {
+            "type": "string",
+            "example": "Santiago Bernabéu Stadium"
+          },
+          "date": {
+            "pattern": "/([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/",
+            "type": "string",
+            "format": "string",
+            "example": "2016-08-29"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,10 +2,10 @@ package com.example.boxticketingwebapi.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "TICKET_TYPE")
 public class TicketTypeModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketTypeId;
     private String typeName;
 
