@@ -16,19 +16,20 @@ import java.util.List;
 @RequestMapping("/ticket-api/v1/events")
 public class EventController {
 
-
     @Autowired
     private EventService eventService;
 
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public @ResponseBody /*Inserts returned value in response body*/ List<EventModel> getEvents() throws Exception {
         return this.eventService.getAllEvents();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody /*Inserts returned value in reponse body*/ EventModel getEvent(@PathVariable(value = "id") Integer eventId) throws Exception {
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public @ResponseBody /*Inserts returned value in response body*/ EventModel getEvent(@PathVariable(value = "id") Long eventId) throws Exception {
         EventModel event = this.eventService.getEventDetails(eventId);
         event.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).addEvent(new EventModel())).withRel("addEvent"));
         event.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getEvents()).withRel("getEvents"));
@@ -42,10 +43,17 @@ public class EventController {
         return this.eventService.saveEvent(event);
     }
 
+    @PutMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
+    public EventModel updateEvent(@RequestBody EventModel event) {
+        return this.eventService.saveEvent(event);
+    }
+
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ADMIN')")
-    public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
+    public String deleteEvent(@PathVariable(value = "id") Long eventId) {
         return this.eventService.deleteEvent(eventId);
     }
 

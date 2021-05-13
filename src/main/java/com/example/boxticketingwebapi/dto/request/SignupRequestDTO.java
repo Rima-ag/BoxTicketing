@@ -9,7 +9,16 @@ public class SignupRequestDTO {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
-    
+    private double amountInWallet;
+
+    public double getAmountInWallet() {
+        return amountInWallet;
+    }
+
+    public void setAmountInWallet(double amountInWallet) {
+        this.amountInWallet = amountInWallet;
+    }
+
     private Set<String> role;
     
     @NotBlank

@@ -7,13 +7,23 @@ public class JwtResponseDTO {
 	private String type = "Bearer";
 	private Long id;
 	private String username;
+	private double amountInWallet;
 	private List<String> roles;
 
-	public JwtResponseDTO(String accessToken, Long id, String username, List<String> roles) {
+	public JwtResponseDTO(String accessToken, Long id, String username, List<String> roles, double amountInWallet) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.roles = roles;
+		this.amountInWallet = amountInWallet;
+	}
+
+	public double getAmountInWallet() {
+		return amountInWallet;
+	}
+
+	public void setAmountInWallet(double amountInWallet) {
+		this.amountInWallet = amountInWallet;
 	}
 
 	public String getAccessToken() {

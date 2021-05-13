@@ -18,17 +18,28 @@ public class UserDetailsImpl implements UserDetails {
 
 	private String username;
 
+	private double amountInWallet;
+
 	@JsonIgnore
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImpl(Long id, String username, String password,
-			Collection<? extends GrantedAuthority> authorities) {
+			Collection<? extends GrantedAuthority> authorities, double amountInWallet) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.amountInWallet = amountInWallet;
+	}
+
+	public double getAmountInWallet() {
+		return amountInWallet;
+	}
+
+	public void setAmountInWallet(double amountInWallet) {
+		this.amountInWallet = amountInWallet;
 	}
 
 	public static UserDetailsImpl build(UserModel user) {
@@ -40,7 +51,7 @@ public class UserDetailsImpl implements UserDetails {
 				user.getId(), 
 				user.getUsername(),
 				user.getPassword(), 
-				authorities);
+				authorities, user.getAmountInWallet());
 	}
 
 	@Override

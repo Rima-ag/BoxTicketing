@@ -25,7 +25,7 @@ public class UserModel {
     @Size(max = 20)
     private String username;
 
-    private String amountInWallet;
+    private double amountInWallet;
     @OneToMany(fetch = FetchType.LAZY)
     private Collection<TicketModel> tickets;
 
@@ -37,8 +37,8 @@ public class UserModel {
 
     public UserModel() {
     }
-
-    public UserModel(String username, String password) {
+    public UserModel(String username, String password, double amountInWallet) {
+        this.amountInWallet = amountInWallet;
         this.password = password;
         this.username = username;
     }
@@ -83,11 +83,11 @@ public class UserModel {
         this.username = username;
     }
 
-    public String getAmountInWallet() {
+    public double getAmountInWallet() {
         return amountInWallet;
     }
 
-    public void setAmountInWallet(String amountInWallet) {
+    public void setAmountInWallet(double amountInWallet) {
         this.amountInWallet = amountInWallet;
     }
 
