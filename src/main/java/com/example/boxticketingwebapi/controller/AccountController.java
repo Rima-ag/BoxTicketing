@@ -8,19 +8,19 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/account")
+@RequestMapping("/api/v1/accounts")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @PostMapping(value = "/addAccount", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public AccountModel addAccount(@RequestBody AccountModel account) {
         return this.accountService.saveAccount(account);
     }
 
-    @DeleteMapping(value = "/deleteAccount/{id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteAccount(@PathVariable(value = "id") Integer accountId) {
         return this.accountService.deleteAccount(accountId);

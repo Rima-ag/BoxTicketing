@@ -15,7 +15,7 @@ public class EventModel extends RepresentationModel<EventModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer eventid;
+    private Integer eventId;
 
     private String date;
 
@@ -26,11 +26,11 @@ public class EventModel extends RepresentationModel<EventModel> {
     private String description;
 
     public int getEventId() {
-        return eventid;
+        return eventId;
     }
 
-    public void setEventId(int eventid) {
-        this.eventid = eventid;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
     public String getDate() {

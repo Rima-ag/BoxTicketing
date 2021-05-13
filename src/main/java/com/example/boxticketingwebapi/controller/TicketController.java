@@ -18,7 +18,7 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody List<TicketModel> getTickets() {
         return this.ticketService.getAllTickets();

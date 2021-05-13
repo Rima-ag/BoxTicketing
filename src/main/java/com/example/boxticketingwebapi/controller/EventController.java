@@ -18,7 +18,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody /*Inserts returned value in reponse body*/ List<EventModel> getEvents() throws Exception {
         return this.eventService.getAllEvents();
@@ -33,13 +33,13 @@ public class EventController {
         return event;
     }
 
-    @PostMapping(value = "/addEvent" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public EventModel addEvent(@RequestBody EventModel event) {
         return this.eventService.saveEvent(event);
     }
 
-    @DeleteMapping(value = "/deleteEvent/{id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
         return this.eventService.deleteEvent(eventId);
