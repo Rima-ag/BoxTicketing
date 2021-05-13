@@ -10,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-//@Table(name = "eventtable")
+@Entity(name = "EVENT")
 public class EventModel extends RepresentationModel<EventModel> {
 
     @Id

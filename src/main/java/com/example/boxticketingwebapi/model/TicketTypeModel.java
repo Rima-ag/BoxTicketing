@@ -2,7 +2,7 @@ package com.example.boxticketingwebapi.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "TICKET_TYPE")
 public class TicketTypeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
