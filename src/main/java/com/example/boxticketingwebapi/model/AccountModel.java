@@ -10,14 +10,14 @@ public class AccountModel {
     private Integer accountId;
     private String password;
     private String username;
-    private String amountInWallet;
+    private double amountInWallet;
     @OneToMany(fetch = FetchType.LAZY)
     private Collection<TicketModel> tickets;
 
     public AccountModel() {
     }
 
-    public AccountModel(Integer accountId, String password, String username, String amountInWallet) {
+    public AccountModel(Integer accountId, String password, String username, double amountInWallet) {
         this.accountId = accountId;
         this.password = password;
         this.username = username;
@@ -56,11 +56,11 @@ public class AccountModel {
         this.username = username;
     }
 
-    public String getAmountInWallet() {
+    public double getAmountInWallet() {
         return amountInWallet;
     }
 
-    public void setAmountInWallet(String amountInWallet) {
+    public void setAmountInWallet(double amountInWallet) {
         this.amountInWallet = amountInWallet;
     }
 

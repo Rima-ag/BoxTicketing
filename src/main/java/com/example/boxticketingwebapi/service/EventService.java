@@ -1,17 +1,12 @@
 package com.example.boxticketingwebapi.service;
 
 
-import com.example.boxticketingwebapi.DataNotFoundException;
+import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.repo.IEventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 @Service
@@ -20,7 +15,7 @@ public class EventService {
     @Autowired
     private IEventRepo eventRepo;
 
-    public List<EventModel> getAllEvents() throws Exception {
+    public List<EventModel> getAllEvents() throws DataNotFoundException {
         List<EventModel> events = this.eventRepo.findAll();
         if(events.size()==0){
             throw new DataNotFoundException("List is Empty");
