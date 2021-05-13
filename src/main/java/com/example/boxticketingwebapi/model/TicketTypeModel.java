@@ -38,10 +38,6 @@ public class TicketTypeModel {
         this.price = price;
     }
 
-    public void setTicketTypeId(Integer ticketTypeId) {
-        this.ticketTypeId = ticketTypeId;
-    }
-
     public TicketTypeModel(Integer ticketTypeId, String typeName, EventModel event, double price) {
         this.ticketTypeId = ticketTypeId;
         this.typeName = typeName;
