@@ -17,17 +17,15 @@ public class EventService {
     private IEventRepo eventRepo;
 
     public List<EventModel> getAllEvents() throws Exception {
-        //ArrayList<EventModel> events = new ArrayList<EventModel>();
-        List<EventModel> events = (List<EventModel>) this.eventRepo.findAll();
-        if(events.size()>0){
+        List<EventModel> events = this.eventRepo.findAll();
+        if(events.size()==0){
             throw new Exception("List is Empty");
         }
         return events;
     }
 
     public EventModel getEventDetails(Integer id) {
-        EventModel event = this.eventRepo.findById(id).get();
-        return event;
+        return this.eventRepo.findById(id).get();
 
     }
 
