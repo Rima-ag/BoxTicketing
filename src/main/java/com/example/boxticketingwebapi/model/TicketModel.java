@@ -14,7 +14,7 @@ public class TicketModel {
     @ManyToOne(fetch = FetchType.EAGER)
     private TicketTypeModel ticketType;
 
-    public TicketModel(int ticketId, EventModel event, TicketTypeModel ticketType) {
+    public TicketModel(Integer ticketId, EventModel event, TicketTypeModel ticketType) {
         this.ticketId = ticketId;
         this.event = event;
         this.ticketType = ticketType;
@@ -23,11 +23,11 @@ public class TicketModel {
     public TicketModel() {
     }
 
-    public int getTicketId() {
+    public Integer getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(int ticketId) {
+    public void setTicketId(Integer ticketId) {
         this.ticketId = ticketId;
     }
 

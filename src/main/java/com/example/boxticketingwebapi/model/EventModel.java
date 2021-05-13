@@ -25,11 +25,11 @@ public class EventModel extends RepresentationModel<EventModel> {
 
     private String description;
 
-    public int getEventId() {
+    public Integer getEventId() {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(Integer eventId) {
         this.eventId = eventId;
     }
 
@@ -69,8 +69,9 @@ public class EventModel extends RepresentationModel<EventModel> {
     }
 
     @JsonCreator
-    public EventModel(String date, String name,
+    public EventModel(Integer eventId, String date, String name,
                       String venue,String description) {
+        this.eventId = eventId;
         this.date = date;
         this.name = name;
         this.venue = venue;

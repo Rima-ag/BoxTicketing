@@ -40,7 +40,7 @@ public class EventController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteEvent(@PathVariable(value = "id") Integer eventId) {
         return this.eventService.deleteEvent(eventId);
     }

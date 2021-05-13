@@ -14,11 +14,11 @@ public class TicketTypeModel {
     public TicketTypeModel() {
     }
 
-    public int getTicketTypeId() {
+    public Integer getTicketTypeId() {
         return ticketTypeId;
     }
 
-    public void setTicketTypeId(int ticketTypeId) {
+    public void setTicketTypeId(Integer ticketTypeId) {
         this.ticketTypeId = ticketTypeId;
     }
 
@@ -42,7 +42,7 @@ public class TicketTypeModel {
         this.ticketTypeId = ticketTypeId;
     }
 
-    public TicketTypeModel(int ticketTypeId, String typeName, EventModel event, double price) {
+    public TicketTypeModel(Integer ticketTypeId, String typeName, EventModel event, double price) {
         this.ticketTypeId = ticketTypeId;
         this.typeName = typeName;
         this.price = price;
