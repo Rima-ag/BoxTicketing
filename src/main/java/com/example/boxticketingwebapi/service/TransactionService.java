@@ -29,7 +29,6 @@ public class TransactionService {
     @Autowired
     private TicketService ticketService;
 
-
     public void buyTicket(TransactionRequestDTO transactionRequestDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserModel account = userService.getUserById(transactionRequestDTO.getUserId());
@@ -39,7 +38,7 @@ public class TransactionService {
                 EventModel event = eventService.getEventDetails(transactionRequestDTO.getEventId());
                 if (event != null) {
                     if (account.getAmountInWallet() >= ticketType.getPrice()) {
-                        TicketModel ticket = ticketService.addTicket(event, ticketType);
+                        TicketModel ticket = ticketService.saveTicket(event, ticketType);
                         account.setAmountInWallet(account.getAmountInWallet() - ticketType.getPrice());
                         account.addTicket(ticket);
                         userService.saveUser(account);

@@ -38,7 +38,7 @@ public class TicketController {
     }
     @PreAuthorize("hasRole('USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public void buyTicket(@RequestBody TransactionRequestDTO transactionRequestDTO){
         transactionService.buyTicket(transactionRequestDTO);
     }

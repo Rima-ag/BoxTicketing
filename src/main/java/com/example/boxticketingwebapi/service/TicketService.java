@@ -35,7 +35,7 @@ public class TicketService {
         return ticket;
     }
 
-    public TicketModel addTicket(EventModel event, TicketTypeModel ticketType){
+    public TicketModel saveTicket(EventModel event, TicketTypeModel ticketType){
         TicketModel ticket = new TicketModel();
         ticket.setEvent(event);
         ticket.setTicketType(ticketType);

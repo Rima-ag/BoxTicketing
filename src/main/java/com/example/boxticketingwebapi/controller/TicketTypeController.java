@@ -16,9 +16,10 @@ public class TicketTypeController {
     @Autowired
     private TicketTypeService ticketTypeService;
 
+
     @PreAuthorize("hasRole('ADMIN')")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public void addTicketType(@RequestBody TicketTypeModel ticketType){
         ticketTypeService.addTicketType(ticketType);
     }
