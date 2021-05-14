@@ -30,7 +30,7 @@ public class TicketController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody List<TicketModel> getTicketsByUserId() {
         return this.ticketService.getTicketsByUserId();
     }
