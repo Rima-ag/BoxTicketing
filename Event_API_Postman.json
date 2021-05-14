@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "c188f890-c798-4184-bea2-533a2ff50f2a",
+		"name": "Event API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Retreive Events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected response code\", function (){",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{eventsUrl}}",
+							"host": [
+								"{{eventsUrl}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retreive Events",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{eventsUrl}}/",
+									"host": [
+										"{{eventsUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Retreive a specific event based on its id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected Status\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"})",
+									"",
+									"if(pm.response.code === 200) {",
+									"    pm.test('Check that event is returned in the response', () => {",
+									"        pm.expect(pm.response.text()).to.include(\"eventId\");",
+									"    })",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{eventsUrl}}/1",
+							"host": [
+								"{{eventsUrl}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retreive a specific event based on its id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{eventsUrl}}/6",
+									"host": [
+										"{{eventsUrl}}"
+									],
+									"path": [
+										"6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Create Event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"El Classico\",\n    \"description\": \"FC Barcelona vs Real Madrid\",\n    \"venue\": \"Santiago El Bernabeu\",\n    \"date\": \"10-05-2019\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{eventsUrl}}",
+							"host": [
+								"{{eventsUrl}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"El Classico\",\n    \"description\": \"FC Barcelona vs Real Madrid\",\n    \"venue\": \"Santiago El Bernabeu\",\n    \"date\": \"10-05-2019\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{eventsUrl}}/addEvent",
+									"host": [
+										"{{eventsUrl}}"
+									],
+									"path": [
+										"addEvent"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\": 1,\n    \"date\": \"10-05-2019\",\n    \"name\": \"El Classico\",\n    \"venue\": \"Camp Nou Stadium\",\n    \"description\": \"FC Barcelona vs Real Madrid\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{eventsUrl}}",
+							"host": [
+								"{{eventsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleting event by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected status code\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([204,404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{eventsUrl}}/1",
+							"host": [
+								"{{eventsUrl}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Header contains token\", function (){",
+							"    pm.request.to.have.header(\"Authorization\");",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Retreive current user's tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ticketsUrl}}",
+							"host": [
+								"{{ticketsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retreive Ticket by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ticketsUrl}}/1",
+							"host": [
+								"{{ticketsUrl}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Header contains token\", function (){",
+							"    pm.request.to.have.header(\"Authorization\");",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "TicketTypes",
+			"item": [
+				{
+					"name": "Add ticket type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected status code\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"typeName\": \"Class A\",\n    \"price\": 500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketTypesUrl}}",
+							"host": [
+								"{{ticketTypesUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retreive ticket types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ticketTypesUrl}}",
+							"host": [
+								"{{ticketTypesUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Header contains token\", function (){",
+							"    pm.request.to.have.header(\"Authorization\");",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup a new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected status code\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"MyB3ri$tr0ngPvvord\",\n    \"role\": [\n        \"admin\"\n    ],\n    \"amountInWallet\": 600.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{usersUrl}}/signup",
+							"host": [
+								"{{usersUrl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200) {",
+									"    pm.test('Check that token is returned in response if a valid username and password is provided', () => {",
+									"        pm.expect(pm.response.text()).to.include(\"accessToken\");",
+									"        pm.expect(pm.response.text()).to.include(\"tokenType\");",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        if(jsonData.accessToken)",
+									"            pm.collectionVariables.set(\"auth\", jsonData.accessToken);",
+									"    })",
+									"}",
+									"",
+									"pm.test(\"Expected status code\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,400]);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\" : \"MyB3ri$tr0ngPvvord\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{usersUrl}}/signin",
+							"host": [
+								"{{usersUrl}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "API Documentation",
+			"item": [
+				{
+					"name": "Retreive Documentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api-docs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Documentation UI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/swagger-ui.html",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"swagger-ui.html"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Make a transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expected status code\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 400, 403, 404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\" : 1,\n    \"ticketTypeId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ticketsUrl}}",
+							"host": [
+								"{{ticketsUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/ticket-api/v1"
+		},
+		{
+			"key": "eventsUrl",
+			"value": "{{baseUrl}}/events"
+		},
+		{
+			"key": "usersUrl",
+			"value": "{{baseUrl}}/users"
+		},
+		{
+			"key": "ticketsUrl",
+			"value": "{{baseUrl}}/tickets"
+		},
+		{
+			"key": "ticketTypesUrl",
+			"value": "{{baseUrl}}/ticketTypes"
+		},
+		{
+			"key": "auth",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyaW1hdXNlciIsImlhdCI6MTYyMDk3OTk1MiwiZXhwIjoxNjIxMDY2MzUyfQ.JqkH66ZcIUeXhm-zSGW_8bv3VeTMBDdfsRo2mDjaQjLffcJ05E3cA-RHK9P-Q8X4zmeMLjuNaTAUEJ-RLoxUsg"
+		}
+	]
+}
