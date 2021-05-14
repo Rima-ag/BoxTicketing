@@ -25,16 +25,16 @@ public class UserController {
 	@PostMapping("/signin")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody JwtResponseDTO authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
-		JwtResponseDTO resp = this.userService.signIn(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
+		JwtResponseDTO resp = userService.signIn(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
 		return resp;
 	}
 
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
 	public MessageResponseDTO registerUser(@Valid @RequestBody SignupRequestDTO signUpRequestDTO) {
-		this.userService.signUp(signUpRequestDTO);
+		userService.signUp(signUpRequestDTO);
 		MessageResponseDTO message =  new MessageResponseDTO("Account successfully created.");
-		message.add(linkTo(methodOn(this.getClass()).userService.signIn(signUpRequestDTO.getUsername(), signUpRequestDTO.getPassword())).withRel("signIn"));
+		message.add(linkTo(methodOn(this.getClass()).authenticateUser(new LoginRequestDTO())).withRel("signIn"));
 		return message;
 	}
 }
