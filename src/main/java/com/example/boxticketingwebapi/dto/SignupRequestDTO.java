@@ -1,4 +1,4 @@
-package com.example.boxticketingwebapi.dto.request;
+package com.example.boxticketingwebapi.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

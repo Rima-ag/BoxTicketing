@@ -1,9 +1,8 @@
 package com.example.boxticketingwebapi.service;
 
 import com.example.boxticketingwebapi.controller.exceptions.BadRequestException;
-import com.example.boxticketingwebapi.dto.request.SignupRequestDTO;
-import com.example.boxticketingwebapi.dto.response.JwtResponseDTO;
-import com.example.boxticketingwebapi.dto.response.MessageResponseDTO;
+import com.example.boxticketingwebapi.dto.SignupRequestDTO;
+import com.example.boxticketingwebapi.dto.JwtResponseDTO;
 import com.example.boxticketingwebapi.model.ERole;
 import com.example.boxticketingwebapi.model.RoleModel;
 import com.example.boxticketingwebapi.model.UserModel;
@@ -13,7 +12,6 @@ import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundExceptio
 import com.example.boxticketingwebapi.security.jwt.JwtUtils;
 import com.example.boxticketingwebapi.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,10 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

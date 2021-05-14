@@ -2,6 +2,7 @@ package com.example.boxticketingwebapi.service;
 
 
 import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundException;
+import com.example.boxticketingwebapi.controller.exceptions.ServerException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.model.TicketModel;
 import com.example.boxticketingwebapi.model.TicketTypeModel;
@@ -36,9 +37,13 @@ public class TicketService {
     }
 
     public TicketModel saveTicket(EventModel event, TicketTypeModel ticketType){
-        TicketModel ticket = new TicketModel();
-        ticket.setEvent(event);
-        ticket.setTicketType(ticketType);
-        return ticketRepo.save(ticket);
+        try{
+            TicketModel ticket = new TicketModel();
+            ticket.setEvent(event);
+            ticket.setTicketType(ticketType);
+            return ticketRepo.save(ticket);
+        } catch (Exception ex){
+            throw new ServerException("Unable to save this ticket.");
+        }
     }
 }

@@ -1,4 +1,6 @@
 package com.example.boxticketingwebapi.model;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.util.Collection;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,7 +13,7 @@ import javax.validation.constraints.Size;
 @Table(uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username")
         })
-public class UserModel {
+public class UserModel  extends RepresentationModel<EventModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

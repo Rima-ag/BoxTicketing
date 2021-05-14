@@ -1,4 +1,4 @@
-package com.example.boxticketingwebapi.dto.response;
+package com.example.boxticketingwebapi.dto;
 
 import java.util.List;
 

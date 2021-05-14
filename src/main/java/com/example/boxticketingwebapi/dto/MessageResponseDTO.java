@@ -1,6 +1,8 @@
-package com.example.boxticketingwebapi.dto.response;
+package com.example.boxticketingwebapi.dto;
 
-public class MessageResponseDTO {
+import org.springframework.hateoas.RepresentationModel;
+
+public class MessageResponseDTO extends RepresentationModel<MessageResponseDTO> {
 	private String message;
 
 	public MessageResponseDTO(String message) {

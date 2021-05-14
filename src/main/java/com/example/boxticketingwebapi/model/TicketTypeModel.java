@@ -1,9 +1,11 @@
 package com.example.boxticketingwebapi.model;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.*;
 
 @Entity(name = "TICKET_TYPE")
-public class TicketTypeModel {
+public class TicketTypeModel extends RepresentationModel<EventModel> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticketTypeId;

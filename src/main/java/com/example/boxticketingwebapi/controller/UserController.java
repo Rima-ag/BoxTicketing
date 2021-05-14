@@ -1,14 +1,18 @@
 package com.example.boxticketingwebapi.controller;
 
-import com.example.boxticketingwebapi.dto.request.LoginRequestDTO;
-import com.example.boxticketingwebapi.dto.request.SignupRequestDTO;
-import com.example.boxticketingwebapi.dto.response.JwtResponseDTO;
+import com.example.boxticketingwebapi.dto.LoginRequestDTO;
+import com.example.boxticketingwebapi.dto.MessageResponseDTO;
+import com.example.boxticketingwebapi.dto.SignupRequestDTO;
+import com.example.boxticketingwebapi.dto.JwtResponseDTO;
 import com.example.boxticketingwebapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,8 +30,11 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	@ResponseStatus(HttpStatus.OK)
-	public void registerUser(@Valid @RequestBody SignupRequestDTO signUpRequestDTO) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public MessageResponseDTO registerUser(@Valid @RequestBody SignupRequestDTO signUpRequestDTO) {
 		this.userService.signUp(signUpRequestDTO);
+		MessageResponseDTO message =  new MessageResponseDTO("Account successfully created.");
+		message.add(linkTo(methodOn(this.getClass()).userService.signIn(signUpRequestDTO.getUsername(), signUpRequestDTO.getPassword())).withRel("signIn"));
+		return message;
 	}
 }

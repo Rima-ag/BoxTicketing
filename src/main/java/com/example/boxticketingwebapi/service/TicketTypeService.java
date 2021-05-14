@@ -1,7 +1,9 @@
 package com.example.boxticketingwebapi.service;
 
 import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundException;
+import com.example.boxticketingwebapi.controller.exceptions.ServerException;
 import com.example.boxticketingwebapi.model.EventModel;
+import com.example.boxticketingwebapi.model.TicketModel;
 import com.example.boxticketingwebapi.model.TicketTypeModel;
 import com.example.boxticketingwebapi.repo.ITicketTypeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,12 @@ public class TicketTypeService {
         return types;
     }
 
-    public void addTicketType(TicketTypeModel ticketType){
-        ticketTypeRepo.save(ticketType);
+    public TicketTypeModel addTicketType(TicketTypeModel ticketType){
+        try{
+            return ticketTypeRepo.save(ticketType);
+        }catch(Exception e){
+            throw new ServerException("Error adding ticket type.");
+        }
     }
 
 }

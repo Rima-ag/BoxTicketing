@@ -2,6 +2,7 @@ package com.example.boxticketingwebapi.service;
 
 
 import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundException;
+import com.example.boxticketingwebapi.controller.exceptions.ServerException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.repo.IEventRepo;
 import com.example.boxticketingwebapi.security.jwt.AuthEntryPointJwt;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.sql.rowset.serial.SerialException;
 import java.util.List;
 
 @Service
@@ -43,7 +45,12 @@ public class EventService {
         if(event == null){
             throw new DataNotFoundException("Event with id:" + id + " not found.");
         }
-        eventRepo.deleteById(id);
+        try{
+            eventRepo.deleteById(id);
+        } catch (Exception ex){
+            throw new ServerException("Unable to delete this event.");
+        }
+
     }
 
 }

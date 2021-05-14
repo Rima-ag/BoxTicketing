@@ -1,6 +1,8 @@
 package com.example.boxticketingwebapi.controller;
 
-import com.example.boxticketingwebapi.dto.request.TransactionRequestDTO;
+import com.example.boxticketingwebapi.dto.MessageResponseDTO;
+import com.example.boxticketingwebapi.dto.TransactionRequestDTO;
+import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.model.TicketModel;
 import com.example.boxticketingwebapi.service.TicketService;
 import com.example.boxticketingwebapi.service.TransactionService;
@@ -11,6 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -34,13 +39,19 @@ public class TicketController {
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public @ResponseBody /*Inserts returned value in response body*/ TicketModel getTicket(@PathVariable(value = "id") Long ticketId) {
-        return this.ticketService.getTicketDetails(ticketId);
+        TicketModel ticket = this.ticketService.getTicketDetails(ticketId);
+        ticket.add(linkTo(methodOn(this.getClass()).getTickets()).withRel("getTickets"));
+        return ticket;
     }
     @PreAuthorize("hasRole('USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void buyTicket(@RequestBody TransactionRequestDTO transactionRequestDTO){
-        transactionService.buyTicket(transactionRequestDTO);
+    public MessageResponseDTO buyTicket(@RequestBody TransactionRequestDTO transactionRequestDTO){
+        TicketModel ticket = transactionService.buyTicket(transactionRequestDTO);
+        MessageResponseDTO message =  new MessageResponseDTO("Ticket successfully bought.");
+        message.add(linkTo(methodOn(this.getClass()).getTickets()).withRel("getTickets"));
+        message.add(linkTo(methodOn(this.getClass()).getTicket(ticket.getTicketId())).withRel("getTicket"));
+        return message;
     }
 
 }

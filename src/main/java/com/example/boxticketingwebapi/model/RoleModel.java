@@ -1,9 +1,11 @@
 package com.example.boxticketingwebapi.model;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.*;
 
 @Entity(name="ROLE")
-public class RoleModel {
+public class RoleModel extends RepresentationModel<EventModel> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
