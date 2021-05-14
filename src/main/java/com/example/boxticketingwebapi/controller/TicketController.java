@@ -37,7 +37,7 @@ public class TicketController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody /*Inserts returned value in response body*/ TicketModel getTicket(@PathVariable(value = "id") Long ticketId) {
         TicketModel ticket = this.ticketService.getTicketDetails(ticketId);
         ticket.add(linkTo(methodOn(this.getClass()).getTicketsByUserId()).withRel("getTickets"));
