@@ -4,6 +4,9 @@ package com.example.boxticketingwebapi.service;
 import com.example.boxticketingwebapi.controller.exceptions.DataNotFoundException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.repo.IEventRepo;
+import com.example.boxticketingwebapi.security.jwt.AuthEntryPointJwt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ public class EventService {
     public List<EventModel> getAllEvents() throws DataNotFoundException {
         List<EventModel> events = this.eventRepo.findAll();
         if(events.size()==0){
-            throw new DataNotFoundException("List is Empty");
+            throw new DataNotFoundException("List is empty.");
         }
         return events;
     }
@@ -26,7 +29,7 @@ public class EventService {
     public EventModel getEventDetails(Long id) throws DataNotFoundException {
         EventModel event = this.eventRepo.findById(id).orElse(null);
         if(event == null){
-            throw new DataNotFoundException("Event doesn't exist Found");
+            throw new DataNotFoundException("Event with id:" + id + " not found.");
         }
         return event;
     }
@@ -35,13 +38,12 @@ public class EventService {
         return eventRepo.save(event);
     }
 
-    public String deleteEvent(Long id){
+    public void deleteEvent(Long id){
         EventModel event = this.eventRepo.findById(id).orElse(null);
         if(event == null){
-            throw new DataNotFoundException("Event with id:" + id + " doesn't exists!");
+            throw new DataNotFoundException("Event with id:" + id + " not found.");
         }
         eventRepo.deleteById(id);
-        return "Event Deleted !";
     }
 
 }

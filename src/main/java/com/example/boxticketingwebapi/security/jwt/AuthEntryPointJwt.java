@@ -1,5 +1,6 @@
 package com.example.boxticketingwebapi.security.jwt;
 
+import com.example.boxticketingwebapi.controller.exceptions.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -20,7 +21,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		logger.error("Unauthorized error: {}", authException.getMessage());
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+		throw new UnauthorizedException("Unauthorized access to this resource.");
 	}
 
 }

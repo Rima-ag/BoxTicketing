@@ -1,5 +1,6 @@
 package com.example.boxticketingwebapi.security.jwt;
 
+import com.example.boxticketingwebapi.controller.exceptions.ServerException;
 import  com.example.boxticketingwebapi.security.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

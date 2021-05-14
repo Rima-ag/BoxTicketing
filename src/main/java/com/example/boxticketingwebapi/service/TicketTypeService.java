@@ -20,7 +20,7 @@ public class TicketTypeService {
     public TicketTypeModel getTicketTypeById(Long ticketTypeId){
         TicketTypeModel ticketType = ticketTypeRepo.findById(ticketTypeId).orElse(null);
         if(ticketType == null){
-            throw new DataNotFoundException("Ticket Type Not Found");
+            throw new DataNotFoundException("Ticket type with id: " + ticketTypeId + " not found.");
         }
         return ticketType;
     }
@@ -28,7 +28,7 @@ public class TicketTypeService {
     public List<TicketTypeModel> getAllTicketTypes() throws DataNotFoundException {
         List<TicketTypeModel> types = this.ticketTypeRepo.findAll();
         if(types.size()==0){
-            throw new DataNotFoundException("List is Empty");
+            throw new DataNotFoundException("List is empty.");
         }
         return types;
     }

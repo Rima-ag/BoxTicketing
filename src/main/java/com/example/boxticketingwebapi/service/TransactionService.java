@@ -40,13 +40,13 @@ public class TransactionService {
                     account.addTicket(ticket);
                     userService.saveUser(account);
                 } else {
-                    throw  new BadRequestException("Amount in wallet is not enough to buy this ticket");
+                    throw new BadRequestException("Amount in wallet is not enough to buy this ticket.");
                 }
             } else {
-                throw new DataNotFoundException("Event ID is invalid");
+                throw new DataNotFoundException("Event ID is invalid.");
             }
         } else {
-            throw new DataNotFoundException("Ticket type ID is invalid");
+            throw new DataNotFoundException("Ticket type ID is invalid.");
         }
     }
 

@@ -22,7 +22,7 @@ public class TicketService {
         ArrayList<TicketModel> tickets = new ArrayList<>();
         this.ticketRepo.findAll().forEach(tickets::add);
         if(tickets.size()==0){
-            throw new DataNotFoundException("Tickets List is Empty");
+            throw new DataNotFoundException("Tickets list is empty.");
         }
         return tickets;
     }
@@ -30,7 +30,7 @@ public class TicketService {
     public TicketModel getTicketDetails(Long id) throws DataNotFoundException{
         TicketModel ticket = this.ticketRepo.findById(id).orElse(null);
         if(ticket == null){
-            throw new DataNotFoundException("Ticket Not Found");
+            throw new DataNotFoundException("Ticket with id: " + id + " not found.");
         }
         return ticket;
     }

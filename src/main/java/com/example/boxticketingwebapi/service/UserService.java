@@ -63,9 +63,8 @@ public class UserService {
     }
 
     public void signUp(SignupRequestDTO signUpRequestDTO) {
-        System.out.println("Here");
         if (userRepository.existsByUsername(signUpRequestDTO.getUsername())) {
-            throw new BadRequestException("Username is already taken");
+            throw new BadRequestException("Username is already taken.");
         }
 
         // Create new user's account
@@ -78,20 +77,20 @@ public class UserService {
 
         if (strRoles == null) {
             RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new DataNotFoundException("Error: Role is not found."));
+                    .orElseThrow(() -> new DataNotFoundException("Role doesn't exist."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         RoleModel adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new DataNotFoundException("Error: Role is not found."));
+                                .orElseThrow(() -> new DataNotFoundException("Role doesn't exist."));
                         roles.add(adminRole);
 
                         break;
                     default:
                         RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new DataNotFoundException("Error: Role is not found."));
+                                .orElseThrow(() -> new DataNotFoundException("Role doesn't exist."));
                         roles.add(userRole);
                 }
             });
@@ -107,7 +106,7 @@ public class UserService {
     public UserModel getUserById(Long accountId){
         UserModel account = this.userRepository.findById(accountId).orElse(null);
         if(account == null) {
-            throw new DataNotFoundException("Account with id:" + accountId + " doesn't exists!");
+            throw new DataNotFoundException("Account with id:" + accountId + " doesn't exists.");
         }
         return account;
     }
