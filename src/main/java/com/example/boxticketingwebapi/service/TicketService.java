@@ -6,8 +6,11 @@ import com.example.boxticketingwebapi.controller.exceptions.ServerException;
 import com.example.boxticketingwebapi.model.EventModel;
 import com.example.boxticketingwebapi.model.TicketModel;
 import com.example.boxticketingwebapi.model.TicketTypeModel;
+import com.example.boxticketingwebapi.model.UserModel;
 import com.example.boxticketingwebapi.repo.ITicketRepo;
+import com.example.boxticketingwebapi.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,9 +22,13 @@ public class TicketService {
     @Autowired
     private ITicketRepo ticketRepo;
 
-    public List<TicketModel> getAllTickets() {
-        ArrayList<TicketModel> tickets = new ArrayList<>();
-        this.ticketRepo.findAll().forEach(tickets::add);
+    @Autowired
+    private UserService userService;
+
+    public List<TicketModel> getTicketsByUserId() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserModel user = userService.getUserById(userDetails.getId());
+        List<TicketModel> tickets = user.getTickets();
         if(tickets.size()==0){
             throw new DataNotFoundException("Tickets list is empty.");
         }

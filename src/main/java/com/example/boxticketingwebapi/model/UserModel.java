@@ -4,6 +4,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.util.Collection;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
@@ -29,7 +30,7 @@ public class UserModel  extends RepresentationModel<EventModel> {
 
     private double amountInWallet;
     @OneToMany(fetch = FetchType.LAZY)
-    private Collection<TicketModel> tickets;
+    private List<TicketModel> tickets;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -93,11 +94,11 @@ public class UserModel  extends RepresentationModel<EventModel> {
         this.amountInWallet = amountInWallet;
     }
 
-    public Collection<TicketModel> getTickets() {
+    public List<TicketModel> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Collection<TicketModel> tickets) {
+    public void setTickets(List<TicketModel> tickets) {
         this.tickets = tickets;
     }
 }
